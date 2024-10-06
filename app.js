@@ -1,9 +1,7 @@
 const translateButton = document.getElementById("translate-btn");
-const fullPage = document.body.innerHTML;
-console.log(fullPage);
 
 translateButton.addEventListener("click", async () => {
-  const pageTextContent = document.body.innerText;
+  const pageTextContent = document.body.innerHTML;
 
   document.body.innerHTML = "<h3>Translating the page... Please wait.</h3>";
 
@@ -17,7 +15,7 @@ translateButton.addEventListener("click", async () => {
         },
         body: JSON.stringify({
           text: pageTextContent,
-          targetLanguage: "DE",
+          targetLanguage: "EN",
         }),
       }
     );
@@ -26,7 +24,9 @@ translateButton.addEventListener("click", async () => {
 
     // Update the page content with the translated version
     if (data.translatedText) {
-      document.body.innerHTML = `<h3>Translation Complete</h3><p>${data.translatedText}</p>`;
+      document.body.innerHTML = `
+        ${data.translatedText}
+      `;
     } else {
       document.body.innerHTML =
         "<h3>Translation failed. Please try again.</h3>";
